@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Prendas</title>
+</head>
+<body>
+    <h2>Gestión de Prendas</h2>
+    <label>ID:</label><input type="text" id="id"><br><br>
+    <label>Nombre:</label><input type="text" id="nombre"><br><br>
+    <label>Talla:</label><input type="text" id="talla"><br><br>
+    <label>Precio:</label><input type="text" id="precio"><br><br>
+
+    <button onclick="guardar()">Guardar</button>
+    <button onclick="buscar()">Buscar</button>
+    <button onclick="actualizar()">Actualizar</button>
+    <button onclick="eliminar()">Eliminar</button>
+
+    <script>
+        const BASE_URL = "http://localhost:8000/api/prendas";
+
+        function guardar() {
+            fetch(`${BASE_URL}/`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nombre: document.getElementById('nombre').value,
+                    talla: document.getElementById('talla').value,
+                    precio: document.getElementById('precio').value
+                })
+            })
+            .then(res => res.json())
+            .then(data => alert("Registro guardado: ID " + data.id));
+        }
+
+        function buscar() {
+            const id = document.getElementById('id').value;
+            fetch(`${BASE_URL}/${id}/`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert("No encontrado");
+                } else {
+                    document.getElementById('nombre').value = data.nombre;
+                    document.getElementById('talla').value = data.talla;
+                    document.getElementById('precio').value = data.precio;
+                }
+            });
+        }
+
+        function actualizar() {
+            const id = document.getElementById('id').value;
+            fetch(`${BASE_URL}/${id}/actualizar/`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nombre: document.getElementById('nombre').value,
+                    talla: document.getElementById('talla').value,
+                    precio: document.getElementById('precio').value
+                })
+            })
+            .then(res => res.json())
+            .then(data => alert("Registro actualizado"));
+        }
+
+        function eliminar() {
+            const id = document.getElementById('id').value;
+            fetch(`${BASE_URL}/${id}/eliminar/`, {
+                method: "DELETE"
+            })
+            .then(() => alert("Registro eliminado"));
+        }
+    </script>
+</body>
+</html>

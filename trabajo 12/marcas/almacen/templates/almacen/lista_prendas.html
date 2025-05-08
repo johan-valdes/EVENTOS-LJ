@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prendas Registradas</title>
+</head>
+<body>
+    <h1>Listado de Prendas Registradas</h1>
+
+    {% if prendas %}
+        <ul>
+            {% for prenda in prendas %}
+                <li>{{ prenda.tipo }} - {{ prenda.marca }} - {{ prenda.talla }} - {{ prenda.color }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay prendas registradas.</p>
+    {% endif %}
+
+    <a href="/">Registrar otra prenda</a>
+</body>
+</html>
