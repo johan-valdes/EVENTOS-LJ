@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Almacen de Ropa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 50px;
+            color: #222;
+        }
+
+        .boton {
+            display: block;
+            width: 280px;
+            margin: 15px 0;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 500;
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .boton:hover {
+            background-color: #0056b3;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Almacen de Ropa</h1>
+
+    <a class="boton" href="{% url 'registrar_prenda' %}">Registrar Prenda</a>
+    <a class="boton" href="{% url 'buscar_prenda' %}">Buscar Prenda</a>
+    <a class="boton" href="{% url 'lista_prendas' %}">Lista de Prendas</a>
+
+</body>
+</html>

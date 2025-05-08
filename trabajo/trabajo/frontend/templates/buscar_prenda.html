@@ -1,0 +1,22 @@
+<h2>Buscar Prenda</h2>
+<form method="get">
+    <label for="prenda_id">ID de la Prenda:</label>
+    <input type="text" name="prenda_id" required>
+    <button type="submit">Buscar</button>
+</form>
+{% if prenda %}
+    <h3>Resultado:</h3>
+    <ul>
+        <li><strong>ID:</strong> {{ prenda.id }}</li>
+        <li><strong>Tipo:</strong> {{ prenda.tipo }}</li>
+        <li><strong>Marca:</strong> {{ prenda.marca }}</li>
+        <li><strong>Color:</strong> {{ prenda.color }}</li>
+        <li><strong>Talla:</strong> {{ prenda.talla }}</li>
+    </ul>
+    <a href="{% url 'actualizar_prenda' prenda.id %}">Actualizar</a>
+    <a href="{% url 'eliminar_prenda' prenda.id %}">Eliminar</a>
+{% elif prenda_id %}
+    <p>No se encontró la prenda con ese ID.</p>
+{% endif %}
+
+<br><a href="/">Volver al inicio</a>
