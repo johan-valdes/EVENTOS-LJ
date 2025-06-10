@@ -1,0 +1,16 @@
+Nombre: beto
+Nacionalidad: veneco
+Edad: 32
+
+Nombre: edu
+Nacionalidad: eeuu
+Edad: 23
+
+Nombre: gabriel garcia
+Nacionalidad: peru
+Edad: 32
+
+Nombre: luis
+Nacionalidad: cococo
+Edad: 12
+
