@@ -1,0 +1,64 @@
+import tkinter as tk
+import re
+
+ventana = tk.Tk()
+ventana.title("Ventana Principal - Ropa")
+ventana.geometry("300x400")
+
+
+def validar_precio(valor):
+    return bool(re.match(r"^\d+(\.\d{1,2})?$", valor))  # Validación de precio (números con hasta 2 decimales)
+
+def validar_estilo(valor):
+    return bool(re.match(r"^[a-zA-Z ]+$", valor))  # Validación para estilo (solo letras y espacios)
+
+def validar_talla(valor):
+    return bool(re.match(r"^[a-zA-Z0-9]+$", valor))  # Validación de talle (letras y números)
+
+def validar_color(valor):
+    return bool(re.match(r"^[a-zA-Z]+$", valor))  # Validación de color (solo letras)
+
+
+def eventoPresionar_Tecla(event, campo, validacion_func, label_validacion):
+    texto = campo.get()
+    
+    if texto == "":
+        label_validacion.config(text="")
+    elif validacion_func(texto):
+        label_validacion.config(text="")
+    else:
+        if validacion_func == validar_precio:
+            label_validacion.config(text="Solo se permiten números y hasta 2 decimales")
+        elif validacion_func == validar_estilo:
+            label_validacion.config(text="Solo se permiten letras y espacios")
+        elif validacion_func == validar_talla:
+            label_validacion.config(text="Solo se permiten letras y números")
+        elif validacion_func == validar_color:
+            label_validacion.config(text="Solo se permiten letras")
+
+
+def crear_campo(ventana, label_text, var, validacion_func):
+    label = tk.Label(ventana, text=label_text)
+    entry = tk.Entry(ventana, textvariable=var)
+    label_validacion = tk.Label(ventana, fg="red")
+    
+    label.pack(padx=10, pady=5)
+    entry.pack(padx=10, pady=5)
+    label_validacion.pack(padx=10, pady=5)
+    
+    entry.bind("<KeyRelease>", lambda event: eventoPresionar_Tecla(event, entry, validacion_func, label_validacion))
+
+
+precio = tk.StringVar()
+estilo = tk.StringVar()
+talle = tk.StringVar()
+color = tk.StringVar()
+
+
+crear_campo(ventana, "Precio de la prenda:", precio, validar_precio)
+crear_campo(ventana, "Estilo de la prenda:", estilo, validar_estilo)
+crear_campo(ventana, "Talle de la prenda:", talle, validar_talla)
+crear_campo(ventana, "Color de la prenda:", color, validar_color)
+
+
+ventana.mainloop()
